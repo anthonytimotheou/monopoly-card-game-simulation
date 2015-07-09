@@ -1,4 +1,4 @@
-package com.anthonytimotheou.items;
+package com.anthonytimotheou.model;
 
 /**
  * Created by atimotheou on 08/07/2015.
@@ -11,7 +11,7 @@ public enum PropertyGroup {
   , RED
   , YELLOW
   , GREEN
-  , BLUE
+  , DARK_BLUE
   , RAILROAD
   , UTILITY
 }
