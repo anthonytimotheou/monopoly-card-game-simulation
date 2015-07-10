@@ -197,7 +197,20 @@ public class CardDeck {
   }
 
   public void printDeckToStandardOut() {
+    System.out.println("The size: " + mCardDeck.size());
     mCardDeck.forEach(System.out::println);
+  }
+
+  public Card takeCard() {
+    if (!(mCardDeck.size() > 0)) {
+      throw new RuntimeException("There are no cards to take");
+    }
+    Card lCard = mCardDeck.get(0); // always get the latest card
+    if (lCard == null) {
+      throw new RuntimeException("The card returned was null");
+    }
+    mCardDeck.remove(0);
+    return lCard;
   }
 
 }
