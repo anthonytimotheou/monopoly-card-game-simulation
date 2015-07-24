@@ -1,21 +1,29 @@
 package com.anthonytimotheou.model.com.anthonytimotheou.environment;
 
 
+import com.anthonytimotheou.model.PropertyGroup;
 import com.anthonytimotheou.model.cards.Card;
 import com.anthonytimotheou.model.cards.CardDeck;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+// Enforces 3 turns per player?
 public class Match {
-  // For now this represents the board as the player has the board as part of their areas.
-  List<Card> lCardDeck = new ArrayList<>();
-  List<Card> lCardPile = new ArrayList<>();
+  private List<Player> mPlayers = new ArrayList<>();
+  private CardDeck mCardDeck = new CardDeck();
+  private List<Card> lPlayedCardPile = new ArrayList<>();
 
-  private static List<Player> mPlayers = new ArrayList<>();
-  private static CardDeck mCardDeck = new CardDeck();
+  public List<Player> getPlayers() {
+    return mPlayers;
+  }
 
-  public static void main(String[] args) {
+  public CardDeck getCardDeck() {
+    return mCardDeck;
+  }
+
+  public void playMatch() {
     // Create new Card Deck
     mCardDeck.createNewDeck();
     mCardDeck.shuffleDeck();
@@ -24,23 +32,67 @@ public class Match {
     // Add players
     mPlayers.add(new Player("Zoe"));
     mPlayers.add(new Player("Anthony"));
-    mPlayers.add(new Player("Max"));
+    //mPlayers.add(new Player("Max"));
 
     // Deal 5 cards to each player by one card at a time to each player
     for (int i = 0; i < 5; i ++) {
       // Deal a card to each player
       for (Player lPlayer : mPlayers) {
         // want to do this
-        //lPlayer.receiveCard();
+        lPlayer.receiveCard(mCardDeck.takeCard());
       }
     }
 
-    // Place cards on deck
+    for (Player lPlayer : mPlayers) {
+      lPlayer.printCardsInHand();
+    }
 
-    // Signify to the first player he can match his move
+    boolean lWonGame = false;
 
-    // Calculate some shizzle
+    // TODO AT - Need to add time constraint too so the game doesn't go on forever
+    while (!lWonGame) {
+      // how are rules of match encoded? Single place outside or within each players logic?
+      // Are they allowed to try and make a bad move or are they forced into the rules?
 
-    // Next place in a loop? Until the game has ended? What happens if it doesn't end? A time limit?
+      // TODO AT - add in age of player and logic to chose and enforce player go
+      for (Player lPlayer : mPlayers) {
+        // deal two cards
+        lPlayer.receiveCard(mCardDeck.takeCard());
+        lPlayer.receiveCard(mCardDeck.takeCard());
+        // Construct other players (all players but this one and pass that to them along
+        // with the card pile (so can see last card played)
+        // tell player to take move, must give them information to take move with
+        lPlayer.takeTurn(this);
+
+        // check whether the player has won ( check for three sets in there property area )
+        int lNumberOfFullSets = 0;
+        for (Map.Entry<PropertyGroup, List<Card>> lPropertyEntry : lPlayer.getPropertyArea().entrySet()) {
+          PropertyGroup lPropertyGroup = lPropertyEntry.getKey();
+          List<Card> lCardsInGroup = lPropertyEntry.getValue();
+          if (lCardsInGroup.size() == lPropertyGroup.getCompletedSetNumber() || lCardsInGroup.size() > lPropertyGroup.getCompletedSetNumber()) {
+            lNumberOfFullSets++;
+          }
+        }
+
+        if (lNumberOfFullSets == 3) {
+          // Exit the game has been won
+          System.out.print("The winner with three sets is " + lPlayer.getName());
+          return;
+        }
+      }
+    }
+  }
+
+  public boolean playCard(Card pCard) {
+    // logic for playing a card?
+    return true;
+    // Uses behaviour of card and additional information passed through to perform action
+
+    // apply behaviour to match by calling execute behaviour on card?
+  }
+
+  public static void main(String[] args) {
+    Match lMatch = new Match();
+    lMatch.playMatch();
   }
 }
