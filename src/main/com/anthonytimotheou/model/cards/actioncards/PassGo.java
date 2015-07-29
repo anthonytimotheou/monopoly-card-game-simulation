@@ -15,7 +15,7 @@ public class PassGo extends ActionCard {
   public boolean isPlayable(Match pMatch, Player lSourcePlayer, Player pTargetPlayer, PropertyGroup pTargetPropertyGroup, PropertyGroup pSourcePropertyGroup) {
     // TODO AT - Maybe check the deck here to make sure there are two cards in it, need a shielding function
     // for all getting of the card deck and that reshuffles form card pile if not full
-    return false;
+    return true;
   }
 
   @Override

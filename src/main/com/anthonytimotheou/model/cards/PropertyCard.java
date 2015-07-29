@@ -2,7 +2,6 @@ package com.anthonytimotheou.model.cards;
 
 import com.anthonytimotheou.model.Location;
 import com.anthonytimotheou.model.PropertyGroup;
-import com.anthonytimotheou.model.cards.Card;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Match;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
 
@@ -11,10 +10,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PropertyCard extends Card {
-  List<PropertyGroup> lPropertyGroupList = new ArrayList<>();
+  List<PropertyGroup> mPropertyGroupList = new ArrayList<>();
+  int mValue;
 
-  public PropertyCard(PropertyGroup ... pPropertyGroups) {
-    lPropertyGroupList = Arrays.asList(pPropertyGroups);
+  public PropertyCard(int pValue, PropertyGroup ... pPropertyGroups) {
+    mPropertyGroupList = Arrays.asList(pPropertyGroups);
+    mValue = pValue;
+  }
+
+  public List<PropertyGroup> getPropertyGroupList() {
+    return mPropertyGroupList;
+  }
+
+  @Override
+  public int getMonetaryValue() {
+    return mValue;
   }
 
   @Override
@@ -24,7 +34,7 @@ public class PropertyCard extends Card {
 
   @Override
   public boolean isPlayable(Match pMatch, Player lSourcePlayer, Player pTargetPlayer, PropertyGroup pTargetPropertyGroup, PropertyGroup pSourcePropertyGroup) {
-    return false;
+    return true;
   }
 
   @Override
@@ -32,9 +42,10 @@ public class PropertyCard extends Card {
     // If more than one look at property group specified in source
     PropertyGroup lChosenPropertyGroup = null;
 
-    if (lPropertyGroupList.size() == 1) {
-      lChosenPropertyGroup = lPropertyGroupList.get(0);
-    } else { // if more than 1 group then use choice of player
+    // TODO AT - simply hack in or statement for now so that if no chosen property group is selected, it places the card in the first property group
+    if (mPropertyGroupList.size() == 1 || pSourcePropertyGroup == null) {
+      lChosenPropertyGroup = mPropertyGroupList.get(0);
+    } else { // If more than 1 group then use choice of player
       lChosenPropertyGroup = pSourcePropertyGroup;
     }
 

@@ -16,6 +16,11 @@ public class MoneyCard extends Card {
   }
 
   @Override
+  public int getMonetaryValue() {
+    return mValueInMillions;
+  }
+
+  @Override
   public List<Location> allowedLocations() {
     return Arrays.asList(Location.BANK);
   }

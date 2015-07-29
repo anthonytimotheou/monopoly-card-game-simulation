@@ -13,7 +13,7 @@ import java.util.Map;
 public class Match {
   private List<Player> mPlayers = new ArrayList<>();
   private CardDeck mCardDeck = new CardDeck();
-  private List<Card> lPlayedCardPile = new ArrayList<>();
+  private List<Card> mPlayedCardPile = new ArrayList<>();
 
   public List<Player> getPlayers() {
     return mPlayers;
@@ -56,21 +56,45 @@ public class Match {
 
       // TODO AT - add in age of player and logic to chose and enforce player go
       for (Player lPlayer : mPlayers) {
-        // deal two cards
+        // TODO AT - Check the deck here, if it is full then take all cards from used pile shuffle and place back in deck
+        // If card deck has less than 5 cards then add more
+        if (mCardDeck.getCardDeck().size() < 5) {
+          System.out.println("Replenishing Deck...");
+          mCardDeck.getCardDeck().addAll(mPlayedCardPile);
+          mPlayedCardPile.removeAll(mPlayedCardPile);
+          mCardDeck.shuffleDeck();
+        }
+
+        // Check if player has no cards in hand, if no cards then deal 5, otherwise deal 2
+        if (lPlayer.getCardsInHand().size() == 0) {
+          // Deal an extra three cards, so it totals five
+          lPlayer.receiveCard(mCardDeck.takeCard());
+          lPlayer.receiveCard(mCardDeck.takeCard());
+          lPlayer.receiveCard(mCardDeck.takeCard());
+        }
+
+        // Deal two cards to play taking turn
         lPlayer.receiveCard(mCardDeck.takeCard());
         lPlayer.receiveCard(mCardDeck.takeCard());
+
+
         // Construct other players (all players but this one and pass that to them along
         // with the card pile (so can see last card played)
         // tell player to take move, must give them information to take move with
         lPlayer.takeTurn(this);
 
+        System.out.println("Entry set is " + lPlayer.getPropertyArea().entrySet());
         // check whether the player has won ( check for three sets in there property area )
         int lNumberOfFullSets = 0;
         for (Map.Entry<PropertyGroup, List<Card>> lPropertyEntry : lPlayer.getPropertyArea().entrySet()) {
           PropertyGroup lPropertyGroup = lPropertyEntry.getKey();
           List<Card> lCardsInGroup = lPropertyEntry.getValue();
-          if (lCardsInGroup.size() == lPropertyGroup.getCompletedSetNumber() || lCardsInGroup.size() > lPropertyGroup.getCompletedSetNumber()) {
-            lNumberOfFullSets++;
+          System.out.println("lPropertyGroup is " + lPropertyGroup);
+          System.out.println("lCardsInGroup is " + lCardsInGroup);
+          if (lCardsInGroup != null) {
+            if (lCardsInGroup.size() == lPropertyGroup.getCompletedSetNumber() || lCardsInGroup.size() > lPropertyGroup.getCompletedSetNumber()) {
+              lNumberOfFullSets++;
+            }
           }
         }
 
@@ -83,11 +107,18 @@ public class Match {
     }
   }
 
-  public boolean playCard(Card pCard) {
-    // logic for playing a card?
-    return true;
-    // Uses behaviour of card and additional information passed through to perform action
+  public boolean playCard(Card pCard, Player pSourcePlayer, Player pTargetPlayer, PropertyGroup lSourcePropertyGroup, PropertyGroup lTargetPropertyGroup) {
+    // Put the card into the played cards pile, it will already of been removed from the hand
+    mPlayedCardPile.add(pCard);
 
+    if (pCard.isPlayable(this, pSourcePlayer, pTargetPlayer, lTargetPropertyGroup, lSourcePropertyGroup)) {
+      pCard.executeBehaviour(this, pSourcePlayer, pTargetPlayer, lTargetPropertyGroup, lSourcePropertyGroup);
+      return true;
+    } else {
+      return false;
+    }
+    // Logic for playing a card?
+    // Uses behaviour of card and additional information passed through to perform action
     // apply behaviour to match by calling execute behaviour on card?
   }
 

@@ -35,7 +35,7 @@ public class SlyDeal extends ActionCard {
     // Remove property set from source player
     pTargetPlayer.getPropertyArea().get(pPropertyGroup).remove(0);
     // Give property Set
-    pSourcePlayer.getPropertyArea().get(pPropertyGroup).add(lCardToSteal);
+    pSourcePlayer.getPropertyArea().get(pSourcePropertyGroup).add(lCardToSteal);
     // TODO AT - Give the player a chance to use their just say no
     return true;
   }

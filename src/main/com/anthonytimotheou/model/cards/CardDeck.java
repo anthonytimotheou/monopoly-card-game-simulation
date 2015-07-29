@@ -19,6 +19,10 @@ import java.util.List;
 public class CardDeck {
   List<Card> mCardDeck = new ArrayList<>();
 
+  public List<Card> getCardDeck() {
+    return mCardDeck;
+  }
+
   /**
    * Creates a DECK of cards based on monopoly card game rules.
    */
@@ -118,64 +122,67 @@ public class CardDeck {
 
     // PROPERTY Cards
     // Base properties
-    lCardDeck.add(new PropertyCard(PropertyGroup.BROWN));
-    lCardDeck.add(new PropertyCard(PropertyGroup.BROWN));
+    // TODO AT - need to cross reference these values against instruction manual onliine
+    // TODO AT - These values may be incorporated into the property gorups maybe?
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.BROWN));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.BROWN));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.LIGHT_BLUE));
-    lCardDeck.add(new PropertyCard(PropertyGroup.LIGHT_BLUE));
-    lCardDeck.add(new PropertyCard(PropertyGroup.LIGHT_BLUE));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.LIGHT_BLUE));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.LIGHT_BLUE));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.LIGHT_BLUE));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.PINK));
-    lCardDeck.add(new PropertyCard(PropertyGroup.PINK));
-    lCardDeck.add(new PropertyCard(PropertyGroup.PINK));
+    lCardDeck.add(new PropertyCard(2, PropertyGroup.PINK));
+    lCardDeck.add(new PropertyCard(2, PropertyGroup.PINK));
+    lCardDeck.add(new PropertyCard(2, PropertyGroup.PINK));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.ORANGE));
-    lCardDeck.add(new PropertyCard(PropertyGroup.ORANGE));
-    lCardDeck.add(new PropertyCard(PropertyGroup.ORANGE));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.ORANGE));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.ORANGE));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.ORANGE));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.RED));
-    lCardDeck.add(new PropertyCard(PropertyGroup.RED));
-    lCardDeck.add(new PropertyCard(PropertyGroup.RED));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.YELLOW));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.YELLOW));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.YELLOW));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.YELLOW));
-    lCardDeck.add(new PropertyCard(PropertyGroup.YELLOW));
-    lCardDeck.add(new PropertyCard(PropertyGroup.YELLOW));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.RED));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.RED));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.RED));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.GREEN));
-    lCardDeck.add(new PropertyCard(PropertyGroup.GREEN));
-    lCardDeck.add(new PropertyCard(PropertyGroup.GREEN));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.GREEN));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.GREEN));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.GREEN));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.DARK_BLUE));
-    lCardDeck.add(new PropertyCard(PropertyGroup.DARK_BLUE));
+    lCardDeck.add(new PropertyCard(5, PropertyGroup.DARK_BLUE));
+    lCardDeck.add(new PropertyCard(5, PropertyGroup.DARK_BLUE));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.RAILROAD));
-    lCardDeck.add(new PropertyCard(PropertyGroup.RAILROAD));
-    lCardDeck.add(new PropertyCard(PropertyGroup.RAILROAD));
-    lCardDeck.add(new PropertyCard(PropertyGroup.RAILROAD));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.RAILROAD));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.RAILROAD));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.RAILROAD));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.RAILROAD));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.UTILITY));
-    lCardDeck.add(new PropertyCard(PropertyGroup.UTILITY));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.UTILITY));
+    lCardDeck.add(new PropertyCard(1, PropertyGroup.UTILITY));
 
     // wildcard properties
-    lCardDeck.add(new PropertyCard(PropertyGroup.LIGHT_BLUE, PropertyGroup.BROWN));
-    lCardDeck.add(new PropertyCard(PropertyGroup.LIGHT_BLUE, PropertyGroup.RAILROAD));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.LIGHT_BLUE, PropertyGroup.BROWN));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.LIGHT_BLUE, PropertyGroup.RAILROAD));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.PINK, PropertyGroup.ORANGE));
-    lCardDeck.add(new PropertyCard(PropertyGroup.PINK, PropertyGroup.ORANGE));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.PINK, PropertyGroup.ORANGE));
+    lCardDeck.add(new PropertyCard(3, PropertyGroup.PINK, PropertyGroup.ORANGE));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.RED, PropertyGroup.YELLOW));
-    lCardDeck.add(new PropertyCard(PropertyGroup.RED, PropertyGroup.YELLOW));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.RED, PropertyGroup.YELLOW));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.RED, PropertyGroup.YELLOW));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.DARK_BLUE, PropertyGroup.GREEN));
+    lCardDeck.add(new PropertyCard(5, PropertyGroup.DARK_BLUE, PropertyGroup.GREEN));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.GREEN, PropertyGroup.RAILROAD));
+    lCardDeck.add(new PropertyCard(4, PropertyGroup.GREEN, PropertyGroup.RAILROAD));
 
-    lCardDeck.add(new PropertyCard(PropertyGroup.RAILROAD, PropertyGroup.UTILITY));
+    lCardDeck.add(new PropertyCard(2, PropertyGroup.RAILROAD, PropertyGroup.UTILITY));
 
     // Two wild card properties
     for (int i = 0; i < 2; i++) {
       lCardDeck.add(new PropertyCard(
-            PropertyGroup.BROWN
+            5
+          , PropertyGroup.BROWN
           , PropertyGroup.LIGHT_BLUE
           , PropertyGroup.PINK
           , PropertyGroup.ORANGE

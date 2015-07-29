@@ -9,7 +9,7 @@ import java.util.List;
 
 // Hold the area of a player, will encapsulate the rules needed about what can be placed in the area
 public class Area {
-  List<Card> mAreaCardList;
+  List<Card> mAreaCardList = new ArrayList<>();
 
   public List<Card> getCardList() {
     return mAreaCardList;
