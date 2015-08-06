@@ -36,6 +36,7 @@ public class Player {
   }
 
   public void receiveCard(Card pCard) {
+    System.out.println("Player " + mName + " is receiving card " + pCard + " into hand");
     mCardsInHand.add(pCard);
   }
 
@@ -81,6 +82,7 @@ public class Player {
           lTargetPlayer = lPlayer;
         }
       }
+      System.out.println("Target player chosen is " + lTargetPlayer.getName());
 
       // TODO AT - lTargetPropertyGroup,
       // Get target property based on first non null property the target player has
@@ -92,6 +94,7 @@ public class Player {
           }
         }
       }
+      System.out.println("Target property group is " + lTargetPropertyGroup);
 
       // Choose source property group based on first non null in the players area
       // need to based this on the card too
@@ -100,15 +103,18 @@ public class Player {
         for (Card lCard : lPropertyCards) {
           if (lCard instanceof PropertyCard) {
             lSourcePropertyGroup = ((PropertyCard) lCard).getPropertyGroupList().get(0);
-            System.out.println("The source property for this card's turn is " + lSourcePropertyGroup);
           }
         }
       }
+      System.out.println("Source property group is " + lSourcePropertyGroup);
 
-      System.out.println("Playing cards in hand size " + mCardsInHand.size());
-      System.out.println("Playing card " + lCardToPlay);
+      System.out.println("Playing card " + lCardToPlay.getName() + " with a target player of " + lTargetPlayer + "; a target property of " + lTargetPropertyGroup
+      + "; a source property of " + lSourcePropertyGroup);
 
       boolean lPlayedCardSuccessfully = pMatch.playCard(lCardToPlay, this, lTargetPlayer, lSourcePropertyGroup, lTargetPropertyGroup);
+      if (!lPlayedCardSuccessfully) {
+        System.out.println("Failed to play card " + lCardToPlay.getName());
+      }
       // TODO AT - what to do here? how to pick another card / what if that fails? overall for loop
       mCardsInHand.remove(0);
     }
@@ -124,7 +130,7 @@ public class Player {
     for (Card lCard : lBankCardList) {
       if (lCard.getMonetaryValue() == pValue) {
         lBankCardList.remove(lCard);
-        return Arrays.asList(lCard);
+        return new ArrayList<>(Arrays.asList(lCard));
       }
     }
 
@@ -174,7 +180,7 @@ public class Player {
         // TODO AT - choose the place to put it better
         PropertyGroup lPropertyGroup = lPropertyCard.getPropertyGroupList().get(0);
         if (mPropertyArea.get(lPropertyGroup) == null) {
-          mPropertyArea.put(lPropertyGroup, Arrays.asList(lCard));
+          mPropertyArea.put(lPropertyGroup, new ArrayList<>(Arrays.asList(lCard)));
         } else {
           mPropertyArea.get(lPropertyGroup).add(lPropertyCard);
         }

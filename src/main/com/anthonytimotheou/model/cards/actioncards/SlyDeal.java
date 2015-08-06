@@ -5,7 +5,14 @@ import com.anthonytimotheou.model.cards.Card;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Match;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class SlyDeal extends ActionCard {
+
+  public SlyDeal() {
+    mName = "SlyDeal";
+  }
 
   @Override
   public int getMonetaryValue() {
@@ -35,7 +42,12 @@ public class SlyDeal extends ActionCard {
     // Remove property set from source player
     pTargetPlayer.getPropertyArea().get(pPropertyGroup).remove(0);
     // Give property Set
-    pSourcePlayer.getPropertyArea().get(pSourcePropertyGroup).add(lCardToSteal);
+    if (pSourcePlayer.getPropertyArea().get(pSourcePropertyGroup) == null) {
+      pSourcePlayer.getPropertyArea().put(pSourcePropertyGroup, new ArrayList<>(Arrays.asList(lCardToSteal)));
+    } else {
+      pSourcePlayer.getPropertyArea().get(pSourcePropertyGroup).add(lCardToSteal);
+    }
+
     // TODO AT - Give the player a chance to use their just say no
     return true;
   }

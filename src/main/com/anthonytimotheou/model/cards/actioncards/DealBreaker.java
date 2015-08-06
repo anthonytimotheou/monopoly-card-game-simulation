@@ -8,7 +8,10 @@ import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
 import java.util.List;
 
 public class DealBreaker extends ActionCard {
-  private PropertyGroup mPropertyGroupToSteal;
+
+  public DealBreaker() {
+    mName = "DealBreaker";
+  }
 
   @Override
   public int getMonetaryValue() {

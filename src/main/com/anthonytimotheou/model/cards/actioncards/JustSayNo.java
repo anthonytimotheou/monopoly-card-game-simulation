@@ -8,6 +8,11 @@ import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
  * Created by atimotheou on 08/07/2015.
  */
 public class JustSayNo extends ActionCard {
+
+  public JustSayNo() {
+    mName = "JustSayNo";
+  }
+
   @Override
   public int getMonetaryValue() {
     return 4;

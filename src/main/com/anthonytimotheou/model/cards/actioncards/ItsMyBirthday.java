@@ -11,6 +11,11 @@ import java.util.List;
  * Created by atimotheou on 08/07/2015.
  */
 public class ItsMyBirthday extends ActionCard {
+
+  public ItsMyBirthday() {
+    mName = "ItsMyBirthday";
+  }
+
   @Override
   public int getMonetaryValue() {
     return 2;

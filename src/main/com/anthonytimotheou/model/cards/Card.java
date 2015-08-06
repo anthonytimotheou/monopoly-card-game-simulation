@@ -10,6 +10,12 @@ import java.util.List;
 
 public abstract class Card implements Comparable<Card>{
 
+  protected String mName;
+
+  public String getName() {
+    return mName;
+  }
+
   public abstract int getMonetaryValue();
 
   public abstract List<Location> allowedLocations();

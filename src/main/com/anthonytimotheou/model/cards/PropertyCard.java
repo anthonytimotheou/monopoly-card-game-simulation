@@ -14,8 +14,9 @@ public class PropertyCard extends Card {
   int mValue;
 
   public PropertyCard(int pValue, PropertyGroup ... pPropertyGroups) {
-    mPropertyGroupList = Arrays.asList(pPropertyGroups);
+    mPropertyGroupList = new ArrayList<>(Arrays.asList(pPropertyGroups));
     mValue = pValue;
+    mName += Arrays.toString(mPropertyGroupList.toArray()) + " Property Card";
   }
 
   public List<PropertyGroup> getPropertyGroupList() {
@@ -29,7 +30,7 @@ public class PropertyCard extends Card {
 
   @Override
   public List<Location> allowedLocations() {
-    return Arrays.asList(Location.PROPERTY);
+    return new ArrayList<>(Arrays.asList(Location.PROPERTY));
   }
 
   @Override

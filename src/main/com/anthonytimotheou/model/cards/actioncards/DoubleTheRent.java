@@ -5,6 +5,11 @@ import com.anthonytimotheou.model.com.anthonytimotheou.environment.Match;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
 
 public class DoubleTheRent extends ActionCard {
+
+  public DoubleTheRent() {
+    mName = "DoubleTheRent";
+  }
+
   @Override
   public int getMonetaryValue() {
     return 3;

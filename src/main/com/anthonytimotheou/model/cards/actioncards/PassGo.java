@@ -6,6 +6,11 @@ import com.anthonytimotheou.model.com.anthonytimotheou.environment.Match;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
 
 public class PassGo extends ActionCard {
+
+  public PassGo() {
+    mName = "PassGo";
+  }
+
   @Override
   public int getMonetaryValue() {
     return 0;

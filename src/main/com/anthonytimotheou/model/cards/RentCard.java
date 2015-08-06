@@ -3,7 +3,6 @@ package com.anthonytimotheou.model.cards;
 
 import com.anthonytimotheou.model.Location;
 import com.anthonytimotheou.model.PropertyGroup;
-import com.anthonytimotheou.model.cards.Card;
 import com.anthonytimotheou.model.cards.actioncards.Hotel;
 import com.anthonytimotheou.model.cards.actioncards.House;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Match;
@@ -14,10 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RentCard extends Card {
-  List<PropertyGroup> lPropertyGroupList = new ArrayList<>();
+  List<PropertyGroup> mPropertyGroupList = new ArrayList<>();
 
   public RentCard(PropertyGroup ... pPropertyGroups) {
-    lPropertyGroupList = Arrays.asList(pPropertyGroups);
+    mPropertyGroupList = new ArrayList<>(Arrays.asList(pPropertyGroups));
+    mName += Arrays.toString(mPropertyGroupList.toArray()) + " Rent Card";
   }
 
   @Override
@@ -33,7 +33,7 @@ public class RentCard extends Card {
 
   @Override
   public boolean isPlayable(Match pMatch, Player lSourcePlayer, Player pTargetPlayer, PropertyGroup pTargetPropertyGroup, PropertyGroup pSourcePropertyGroup) {
-    // TODO AT - Should check the source group is in the lPropertyGroupList
+    // TODO AT - Should check the source group is in the mPropertyGroupList
     if (!(lSourcePlayer.getPropertyArea().get(pSourcePropertyGroup) == null) && lSourcePlayer.getPropertyArea().get(pSourcePropertyGroup).size() > 0) {
       return true;
     } else {
@@ -52,7 +52,7 @@ public class RentCard extends Card {
     if (lPropertyCards.size() <= pSourcePropertyGroup.getCompletedSetNumber()) {
       lRentValue = lGroupRentValues.get(lPropertyCards.size()-1);
     } else { // check for house and hotel values
-      lRentValue = lGroupRentValues.get(pSourcePropertyGroup.getCompletedSetNumber());
+      lRentValue = lGroupRentValues.get(pSourcePropertyGroup.getCompletedSetNumber()-1);
       for (Card lCard : lPropertyCards) {
         if (lCard instanceof House || lCard instanceof Hotel) {
           lRentValue += 4;

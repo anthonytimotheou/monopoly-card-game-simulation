@@ -5,6 +5,7 @@ import com.anthonytimotheou.model.PropertyGroup;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Match;
 import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class MoneyCard extends Card {
 
   public MoneyCard(int pValueInMillions) {
     mValueInMillions = pValueInMillions;
+    mName = pValueInMillions + " Money Card";
   }
 
   @Override
@@ -22,7 +24,7 @@ public class MoneyCard extends Card {
 
   @Override
   public List<Location> allowedLocations() {
-    return Arrays.asList(Location.BANK);
+    return new ArrayList<>(Arrays.asList(Location.BANK));
   }
 
   @Override

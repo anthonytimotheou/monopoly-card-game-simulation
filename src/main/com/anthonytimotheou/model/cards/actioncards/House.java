@@ -8,6 +8,11 @@ import com.anthonytimotheou.model.com.anthonytimotheou.environment.Player;
 import java.util.List;
 
 public class House extends ActionCard {
+
+  public House() {
+    mName = "House";
+  }
+
   @Override
   public int getMonetaryValue() {
     return 3;

@@ -9,6 +9,10 @@ import java.util.List;
 
 public class DebtCollector extends ActionCard {
 
+  public DebtCollector() {
+    mName = "DebtCollector";
+  }
+
   @Override
   public int getMonetaryValue() {
     return 4;
